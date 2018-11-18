@@ -1146,7 +1146,7 @@
    * Use Trinamic's ultra quiet stepping mode.
    * When disabled, Marlin will use spreadCycle stepping mode.
    */
-  //#define STEALTHCHOP
+  #define STEALTHCHOP
 
   /**
    * Monitor Trinamic TMC2130 and TMC2208 drivers for error conditions,
@@ -1173,12 +1173,12 @@
    * STEALTHCHOP needs to be enabled.
    * M913 X/Y/Z/E to live tune the setting
    */
-  //#define HYBRID_THRESHOLD
+  #define HYBRID_THRESHOLD
 
-  #define X_HYBRID_THRESHOLD      20  // [mm/s]
-  #define X2_HYBRID_THRESHOLD     20
-  #define Y_HYBRID_THRESHOLD      20
-  #define Y2_HYBRID_THRESHOLD     20
+  #define X_HYBRID_THRESHOLD      60  // [mm/s]
+  #define X2_HYBRID_THRESHOLD     60
+  #define Y_HYBRID_THRESHOLD      60
+  #define Y2_HYBRID_THRESHOLD     60
   #define Z_HYBRID_THRESHOLD       3
   #define Z2_HYBRID_THRESHOLD      3
   #define E0_HYBRID_THRESHOLD     30
@@ -1241,13 +1241,13 @@
    *   stepperY.interpolate(0); \
    * }
    */
-  #define TMC_ADV() { \
-    stepperY.off_time(2);\
-    stepperX.off_time(2);\
-    stepperZ.off_time(2);\
-    stepperE0.off_time(2);\
-    stepperE1.off_time(2);\
-  }
+//  #define TMC_ADV() { \
+//    stepperY.off_time(2);\
+//    stepperX.off_time(2);\
+//    stepperZ.off_time(2);\
+//    stepperE0.off_time(2);\
+//    stepperE1.off_time(2);\
+//  }
 
 #endif // TMC2130 || TMC2208
 
