@@ -42,11 +42,13 @@
 //
 
 #ifndef X_CS_PIN
-  #define X_CS_PIN 59
+  #define X_CS_PIN 11
 #endif
 
 #ifndef Y_CS_PIN
-  #define Y_CS_PIN 63
+  #define Y_CS_PIN 6
 #endif
+
+#define FAN_PIN 5
 
 #include "pins_RAMPS.h"
