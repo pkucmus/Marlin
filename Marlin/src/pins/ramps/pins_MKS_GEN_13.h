@@ -34,7 +34,7 @@
   #error "MKS GEN 1.3/1.4 supports up to 2 hotends / E-steppers. Comment out this line to continue."
 #endif
 
-#define BOARD_NAME "MKS GEN >= v1.3"
+#define BOARD_INFO_NAME "MKS GEN >= v1.3"
 
 //
 // Heaters / Fans
@@ -96,6 +96,8 @@
   #undef SD_DETECT_PIN
   #undef BEEPER_PIN
   #undef KILL_PIN
+  #undef STAT_LED_RED_PIN
+  #undef STAT_LED_BLUE_PIN
 
   //
   // VIKI2 12-wire lead

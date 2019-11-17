@@ -30,11 +30,11 @@
 #endif
 
 #if MB(MEGATRONICS_32)
-  #define BOARD_NAME "Megatronics v3.2"
+  #define BOARD_INFO_NAME "Megatronics v3.2"
 #elif MB(MEGATRONICS_31)
-  #define BOARD_NAME "Megatronics v3.1"
+  #define BOARD_INFO_NAME "Megatronics v3.1"
 #else
-  #define BOARD_NAME "Megatronics v3.0"
+  #define BOARD_INFO_NAME "Megatronics v3.0"
 #endif
 
 //
@@ -48,12 +48,12 @@
 //
 // Limit Switches
 //
-#define X_MIN_PIN          37
-#define X_MAX_PIN          40
-#define Y_MIN_PIN          41
-#define Y_MAX_PIN          38
-#define Z_MIN_PIN          18
-#define Z_MAX_PIN          19
+#define X_MIN_PIN          37   // No INT
+#define X_MAX_PIN          40   // No INT
+#define Y_MIN_PIN          41   // No INT
+#define Y_MAX_PIN          38   // No INT
+#define Z_MIN_PIN          18   // No INT
+#define Z_MAX_PIN          19   // No INT
 
 //
 // Z Probe (when not Z_MIN_PIN)
@@ -164,7 +164,7 @@
   #define SHIFT_OUT        34
   #define SHIFT_EN         44
 
-  #if MB(MEGATRONICS_31) || MB(MEGATRONICS_32)
+  #if MB(MEGATRONICS_31, MEGATRONICS_32)
     #define SD_DETECT_PIN  56
   #endif
 
@@ -174,8 +174,8 @@
 // M3/M4/M5 - Spindle/Laser Control
 //
 #if DISABLED(REPRAPWORLD_KEYPAD)        // try to use the keypad connector first
-  #define SPINDLE_LASER_PWM_PIN    44   // MUST BE HARDWARE PWM
-  #define SPINDLE_LASER_ENA_PIN    43   // Pin should have a pullup!
+  #define SPINDLE_LASER_PWM_PIN    44   // Hardware PWM
+  #define SPINDLE_LASER_ENA_PIN    43   // Pullup!
   #define SPINDLE_DIR_PIN          42
 #elif EXTRUDERS <= 2
   // Hijack the last extruder so that we can get the PWM signal off the Y breakout
@@ -189,7 +189,7 @@
   #define Y_ENABLE_PIN             23
   #define Y_STEP_PIN               22
   #define Y_DIR_PIN                60
-  #define SPINDLE_LASER_PWM_PIN     4   // MUST BE HARDWARE PWM
-  #define SPINDLE_LASER_ENA_PIN    17   // Pin should have a pullup!
+  #define SPINDLE_LASER_PWM_PIN     4   // Hardware PWM
+  #define SPINDLE_LASER_ENA_PIN    17   // Pullup!
   #define SPINDLE_DIR_PIN           5
 #endif

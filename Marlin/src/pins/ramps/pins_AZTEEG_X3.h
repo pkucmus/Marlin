@@ -27,16 +27,14 @@
 
 #ifndef __AVR_ATmega2560__
   #error "Oops! Select 'Arduino/Genuino Mega or Mega 2560' in 'Tools > Board.'"
-#endif
-
-#if HOTENDS > 2 || E_STEPPERS > 2
+#elif HOTENDS > 2 || E_STEPPERS > 2
   #error "Azteeg X3 supports up to 2 hotends / E-steppers. Comment out this line to continue."
 #endif
 
 #if ENABLED(CASE_LIGHT_ENABLE) && !PIN_EXISTS(CASE_LIGHT)
   #define CASE_LIGHT_PIN    6   // Define before RAMPS pins include
 #endif
-#define BOARD_NAME "Azteeg X3"
+#define BOARD_INFO_NAME "Azteeg X3"
 
 //
 // Servos
@@ -92,7 +90,7 @@
     #undef SERVO0_PIN
     #define SERVO0_PIN     11
   #endif
-  #define SPINDLE_LASER_PWM_PIN     7   // MUST BE HARDWARE PWM
-  #define SPINDLE_LASER_ENA_PIN    20   // Pin should have a pullup!
+  #define SPINDLE_LASER_PWM_PIN     7   // Hardware PWM
+  #define SPINDLE_LASER_ENA_PIN    20   // Pullup!
   #define SPINDLE_DIR_PIN          21
 #endif

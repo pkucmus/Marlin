@@ -27,14 +27,16 @@
 
 #ifndef __AVR_ATmega2560__
   #error "Oops! Select 'Arduino/Genuino Mega or Mega 2560' in 'Tools > Board.'"
+#elif HOTENDS > 3 || E_STEPPERS > 3
+  #error "Formbot supports up to 3 hotends / E-steppers. Comment out this line to continue."
 #endif
 
-#if HOTENDS > 3 || E_STEPPERS > 3
-  #error "Formbot supports up to 3 hotends / E-steppers. Comment this line to keep going."
+#ifndef BOARD_INFO_NAME
+  #define BOARD_INFO_NAME      "Formbot Raptor"
 #endif
-
-#define BOARD_NAME           "Formbot Raptor"
-#define DEFAULT_MACHINE_NAME BOARD_NAME
+#ifndef DEFAULT_MACHINE_NAME
+  #define DEFAULT_MACHINE_NAME BOARD_INFO_NAME
+#endif
 
 //
 // Servos
@@ -113,9 +115,9 @@
 
 // SPI for Max6675 or Max31855 Thermocouple
 #if DISABLED(SDSUPPORT)
-  #define MAX6675_SS_PIN   66 // Do not use pin 53 if there is even the remote possibility of using Display/SD card
+  #define MAX6675_SS_PIN   66   // Don't use 53 if there is even the remote possibility of using Display/SD card
 #else
-  #define MAX6675_SS_PIN   66 // Do not use pin 49 as this is tied to the switch inside the SD card socket to detect if there is an SD card present
+  #define MAX6675_SS_PIN   66   // Don't use 49 as this is tied to the switch inside the SD card socket to detect if there is an SD card present
 #endif
 
 //

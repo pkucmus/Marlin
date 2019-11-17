@@ -27,13 +27,11 @@
 
 #ifndef __AVR_ATmega2560__
   #error "Oops! Select 'Arduino/Genuino Mega or Mega 2560' in 'Tools > Board.'"
-#endif
-
-#if HOTENDS > 2 || E_STEPPERS > 2
+#elif HOTENDS > 2 || E_STEPPERS > 2
   #error "Mega Controller supports up to 2 hotends / E-steppers. Comment out this line to continue."
 #endif
 
-#define BOARD_NAME "Mega Controller"
+#define BOARD_INFO_NAME "Mega Controller"
 
 //
 // Servos
@@ -161,6 +159,6 @@
 //
 // M3/M4/M5 - Spindle/Laser Control
 //
-#define SPINDLE_LASER_PWM_PIN     6   // MUST BE HARDWARE PWM
-#define SPINDLE_LASER_ENA_PIN     7   // Pin should have a pullup!
+#define SPINDLE_LASER_PWM_PIN     6   // Hardware PWM
+#define SPINDLE_LASER_ENA_PIN     7   // Pullup!
 #define SPINDLE_DIR_PIN           8

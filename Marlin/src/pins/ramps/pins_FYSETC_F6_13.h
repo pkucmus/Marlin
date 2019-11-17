@@ -22,7 +22,7 @@
 #pragma once
 
 //
-// Fysetc F6 pin assignments
+// FYSETC F6 pin assignments
 //
 
 #ifndef __AVR_ATmega2560__
@@ -33,7 +33,7 @@
   //#error "SD_DETECT_INVERTED must be disabled for the FYSETC_F6_13 board."
 #endif
 
-#define BOARD_NAME "FYSETC F6 1.3"
+#define BOARD_INFO_NAME "FYSETC F6 1.3"
 
 #define RESET_PIN          30
 #define SPI_FLASH_CS       83
@@ -118,8 +118,12 @@
 //
 
 #if HAS_TMC220x
-  // Software serial
-  // At the moment, F6 rx pins are not pc interrupt pins
+  /**
+   * TMC2208/TMC2209 stepper drivers
+   *
+   * Software serial communication pins.
+   * At the moment, F6 rx pins are not pc interrupt pins
+   */
   #define X_SERIAL_RX_PIN  -1   // 71
   #define X_SERIAL_TX_PIN  72
   #define Y_SERIAL_RX_PIN  -1   // 73

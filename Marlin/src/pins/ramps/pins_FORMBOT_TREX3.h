@@ -27,14 +27,12 @@
 
 #ifndef __AVR_ATmega2560__
   #error "Oops! Select 'Arduino/Genuino Mega or Mega 2560' in 'Tools > Board.'"
+#elif HOTENDS > 2 || E_STEPPERS > 2
+  #error "Formbot supports up to 2 hotends / E-steppers. Comment out this line to continue."
 #endif
 
-#if HOTENDS > 2 || E_STEPPERS > 2
-  #error "Formbot supports up to 2 hotends / E-steppers. Comment this line to keep going."
-#endif
-
-#define BOARD_NAME           "Formbot"
-#define DEFAULT_MACHINE_NAME BOARD_NAME
+#define BOARD_INFO_NAME      "Formbot"
+#define DEFAULT_MACHINE_NAME BOARD_INFO_NAME
 
 //
 // Servos
@@ -114,9 +112,9 @@
 
 // SPI for Max6675 or Max31855 Thermocouple
 #if DISABLED(SDSUPPORT)
-  #define MAX6675_SS_PIN   66 // Do not use pin 53 if there is even the remote possibility of using Display/SD card
+  #define MAX6675_SS_PIN   66   // Don't use 53 if there is even the remote possibility of using Display/SD card
 #else
-  #define MAX6675_SS_PIN   66 // Do not use pin 49 as this is tied to the switch inside the SD card socket to detect if there is an SD card present
+  #define MAX6675_SS_PIN   66   // Don't use 49 as this is tied to the switch inside the SD card socket to detect if there is an SD card present
 #endif
 
 
@@ -144,8 +142,8 @@
   #define LED_PIN          13
 #endif
 
-#define SPINDLE_LASER_PWM_PIN    -1   // MUST BE HARDWARE PWM
-#define SPINDLE_LASER_ENA_PIN     4   // Pin should have a pullup!
+#define SPINDLE_LASER_PWM_PIN    -1   // Hardware PWM
+#define SPINDLE_LASER_ENA_PIN     4   // Pullup!
 
 // Use the RAMPS 1.4 Analog input 5 on the AUX2 connector
 #define FILWIDTH_PIN        5   // Analog Input

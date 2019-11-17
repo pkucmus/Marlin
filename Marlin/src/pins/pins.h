@@ -21,6 +21,8 @@
  */
 #pragma once
 
+#include "../core/boards.h"
+
 /**
  * Include pins definitions
  *
@@ -35,17 +37,19 @@
 
 #define MAX_EXTRUDERS 6
 
-#if MB(RAMPS_13_EFB) || MB(RAMPS_14_EFB) || MB(RAMPS_PLUS_EFB) || MB(RAMPS_14_RE_ARM_EFB) || MB(RAMPS_SMART_EFB) || MB(RAMPS_DUO_EFB) || MB(RAMPS4DUE_EFB)
+#if   MB(RAMPS_13_EFB, RAMPS_14_EFB, RAMPS_PLUS_EFB, RAMPS_14_RE_ARM_EFB, RAMPS_SMART_EFB, RAMPS_DUO_EFB, RAMPS4DUE_EFB)
   #define IS_RAMPS_EFB
-#elif MB(RAMPS_13_EEB) || MB(RAMPS_14_EEB) || MB(RAMPS_PLUS_EEB) || MB(RAMPS_14_RE_ARM_EEB) || MB(RAMPS_SMART_EEB) || MB(RAMPS_DUO_EEB) || MB(RAMPS4DUE_EEB)
+#elif MB(RAMPS_13_EEB, RAMPS_14_EEB, RAMPS_PLUS_EEB, RAMPS_14_RE_ARM_EEB, RAMPS_SMART_EEB, RAMPS_DUO_EEB, RAMPS4DUE_EEB)
   #define IS_RAMPS_EEB
-#elif MB(RAMPS_13_EFF) || MB(RAMPS_14_EFF) || MB(RAMPS_PLUS_EFF) || MB(RAMPS_14_RE_ARM_EFF) || MB(RAMPS_SMART_EFF) || MB(RAMPS_DUO_EFF) || MB(RAMPS4DUE_EFF)
+#elif MB(RAMPS_13_EFF, RAMPS_14_EFF, RAMPS_PLUS_EFF, RAMPS_14_RE_ARM_EFF, RAMPS_SMART_EFF, RAMPS_DUO_EFF, RAMPS4DUE_EFF)
   #define IS_RAMPS_EFF
-#elif MB(RAMPS_13_EEF) || MB(RAMPS_14_EEF) || MB(RAMPS_PLUS_EEF) || MB(RAMPS_14_RE_ARM_EEF) || MB(RAMPS_SMART_EEF) || MB(RAMPS_DUO_EEF) || MB(RAMPS4DUE_EEF)
+#elif MB(RAMPS_13_EEF, RAMPS_14_EEF, RAMPS_PLUS_EEF, RAMPS_14_RE_ARM_EEF, RAMPS_SMART_EEF, RAMPS_DUO_EEF, RAMPS4DUE_EEF)
   #define IS_RAMPS_EEF
-#elif MB(RAMPS_13_SF)  || MB(RAMPS_14_SF)  || MB(RAMPS_PLUS_SF)  || MB(RAMPS_14_RE_ARM_SF)  || MB(RAMPS_SMART_SF)  || MB(RAMPS_DUO_SF)  || MB(RAMPS4DUE_SF)
+#elif MB(RAMPS_13_SF,  RAMPS_14_SF,  RAMPS_PLUS_SF,  RAMPS_14_RE_ARM_SF,  RAMPS_SMART_SF,  RAMPS_DUO_SF,  RAMPS4DUE_SF)
   #define IS_RAMPS_SF
 #endif
+
+#define HAS_FREE_AUX2_PINS !(BOTH(ULTRA_LCD, NEWPANEL) && ANY(PANEL_ONE, VIKI2, miniVIKI, MINIPANEL, REPRAPWORLD_KEYPAD))
 
 //
 // RAMPS 1.3 / 1.4 - ATmega1280, ATmega2560
@@ -174,6 +178,13 @@
   #include "ramps/pins_TRONXY_V3_1_0.h"         // ATmega2560                             env:megaatmega2560
 #elif MB(Z_BOLT_X_SERIES)
   #include "ramps/pins_Z_BOLT_X_SERIES.h"       // ATmega2560                             env:megaatmega2560
+#elif MB(TT_OSCAR)
+  #include "ramps/pins_TT_OSCAR.h"              // ATmega2560                             env:megaatmega2560
+#elif MB(TANGO)
+  #include "ramps/pins_TANGO.h"                 // ATmega2560                             env:megaatmega2560
+#elif MB(MKS_GEN_L_V2)
+  #include "ramps/pins_MKS_GEN_L_V2.h"          // ATmega2560                             env:megaatmega2560
+
 
 //
 // RAMBo and derivatives
@@ -181,7 +192,7 @@
 
 #elif MB(RAMBO)
   #include "rambo/pins_RAMBO.h"                 // ATmega2560                             env:rambo
-#elif MB(MINIRAMBO) || MB(MINIRAMBO_10A)
+#elif MB(MINIRAMBO, MINIRAMBO_10A)
   #include "rambo/pins_MINIRAMBO.h"             // ATmega2560                             env:rambo
 #elif MB(EINSY_RAMBO)
   #include "rambo/pins_EINSY_RAMBO.h"           // ATmega2560                             env:rambo
@@ -195,48 +206,56 @@
 //
 
 #elif MB(CNCONTROLS_11)
-  #include "pins_CNCONTROLS_11.h"               // ATmega1280, ATmega2560                 env:megaatmega1280 env:megaatmega2560
+  #include "mega/pins_CNCONTROLS_11.h"          // ATmega1280, ATmega2560                 env:megaatmega1280 env:megaatmega2560
 #elif MB(CNCONTROLS_12)
-  #include "pins_CNCONTROLS_12.h"               // ATmega1280, ATmega2560                 env:megaatmega1280 env:megaatmega2560
+  #include "mega/pins_CNCONTROLS_12.h"          // ATmega1280, ATmega2560                 env:megaatmega1280 env:megaatmega2560
+#elif MB(CNCONTROLS_15)
+  #include "mega/pins_CNCONTROLS_15.h"          // ATmega1280, ATmega2560                 env:megaatmega1280 env:megaatmega2560
 #elif MB(MIGHTYBOARD_REVE)
-  #include "pins_MIGHTYBOARD_REVE.h"            // ATmega1280, ATmega2560                 env:megaatmega1280 env:megaatmega2560
+  #include "mega/pins_MIGHTYBOARD_REVE.h"       // ATmega1280, ATmega2560                 env:megaatmega1280 env:megaatmega2560
 #elif MB(CHEAPTRONIC)
-  #include "pins_CHEAPTRONIC.h"                 // ATmega2560                             env:megaatmega2560
+  #include "mega/pins_CHEAPTRONIC.h"            // ATmega2560                             env:megaatmega2560
 #elif MB(CHEAPTRONIC_V2)
-  #include "pins_CHEAPTRONICv2.h"               // ATmega2560                             env:megaatmega2560
+  #include "mega/pins_CHEAPTRONICv2.h"          // ATmega2560                             env:megaatmega2560
 #elif MB(MEGATRONICS)
-  #include "pins_MEGATRONICS.h"                 // ATmega2560                             env:megaatmega2560
+  #include "mega/pins_MEGATRONICS.h"            // ATmega2560                             env:megaatmega2560
 #elif MB(MEGATRONICS_2)
-  #include "pins_MEGATRONICS_2.h"               // ATmega2560                             env:megaatmega2560
-#elif MB(MEGATRONICS_3) || MB(MEGATRONICS_31) || MB(MEGATRONICS_32)
-  #include "pins_MEGATRONICS_3.h"               // ATmega2560                             env:megaatmega2560
+  #include "mega/pins_MEGATRONICS_2.h"          // ATmega2560                             env:megaatmega2560
+#elif MB(MEGATRONICS_3, MEGATRONICS_31, MEGATRONICS_32)
+  #include "mega/pins_MEGATRONICS_3.h"          // ATmega2560                             env:megaatmega2560
 #elif MB(ELEFU_3)
-  #include "pins_ELEFU_3.h"                     // ATmega2560                             env:megaatmega2560
+  #include "mega/pins_ELEFU_3.h"                // ATmega2560                             env:megaatmega2560
 #elif MB(LEAPFROG)
-  #include "pins_LEAPFROG.h"                    // ATmega1280, ATmega2560                 env:megaatmega1280 env:megaatmega2560
+  #include "mega/pins_LEAPFROG.h"               // ATmega1280, ATmega2560                 env:megaatmega1280 env:megaatmega2560
 #elif MB(MEGACONTROLLER)
-  #include "pins_MEGACONTROLLER.h"              // ATmega2560                             env:megaatmega2560
+  #include "mega/pins_MEGACONTROLLER.h"         // ATmega2560                             env:megaatmega2560
 #elif MB(GT2560_REV_A)
-  #include "pins_GT2560_REV_A.h"                // ATmega1280, ATmega2560                 env:megaatmega1280 env:megaatmega2560
+  #include "mega/pins_GT2560_REV_A.h"           // ATmega1280, ATmega2560                 env:megaatmega1280 env:megaatmega2560
 #elif MB(GT2560_REV_A_PLUS)
-  #include "pins_GT2560_REV_A_PLUS.h"           // ATmega1280, ATmega2560                 env:megaatmega1280 env:megaatmega2560
+  #include "mega/pins_GT2560_REV_A_PLUS.h"      // ATmega1280, ATmega2560                 env:megaatmega1280 env:megaatmega2560
 #elif MB(GT2560_V3)
-  #include "pins_GT2560_V3.h"                   // ATmega2560                             env:megaatmega2560
+  #include "mega/pins_GT2560_V3.h"              // ATmega2560                             env:megaatmega2560
 #elif MB(GT2560_V3_MC2)
-  #include "pins_GT2560_V3_MC2.h"               // ATmega2560                             env:megaatmega2560
+  #include "mega/pins_GT2560_V3_MC2.h"          // ATmega2560                             env:megaatmega2560
 #elif MB(GT2560_V3_A20)
-  #include "pins_GT2560_V3_A20.h"               // ATmega2560                             env:megaatmega2560
+  #include "mega/pins_GT2560_V3_A20.h"          // ATmega2560                             env:megaatmega2560
 #elif MB(EINSTART_S)
-  #include "pins_EINSTART-S.h"                  // ATmega1280, ATmega2560                 env:megaatmega1280 env:megaatmega2560
+  #include "mega/pins_EINSTART-S.h"             // ATmega1280, ATmega2560                 env:megaatmega1280 env:megaatmega2560
+#elif MB(WANHAO_ONEPLUS)
+  #include "mega/pins_WANHAO_ONEPLUS.h"         // ATmega2560                             env:megaatmega2560
+#elif MB(OVERLORD)
+  #include "mega/pins_OVERLORD.h"               // ATmega2560                             env:megaatmega2560
+#elif MB(HJC2560C_REV2)
+  #include "mega/pins_HJC2560C_REV2.h"          // ATmega2560                             env:megaatmega2560
 
 //
 // ATmega1281, ATmega2561
 //
 
 #elif MB(MINITRONICS)
-  #include "pins_MINITRONICS.h"                 // ATmega1281                             env:megaatmega1280
+  #include "mega/pins_MINITRONICS.h"            // ATmega1281                             env:megaatmega1280
 #elif MB(SILVER_GATE)
-  #include "pins_SILVER_GATE.h"                 // ATmega2561                             env:megaatmega2560
+  #include "mega/pins_SILVER_GATE.h"            // ATmega2561                             env:megaatmega2560
 
 //
 // Sanguinololu and Derivatives - ATmega644P, ATmega1284P
@@ -341,8 +360,6 @@
   #include "lpc1768/pins_BIQU_B300_V1.0.h"      // LPC1768                                env:LPC1768
 #elif MB(BIGTREE_SKR_V1_3)
   #include "lpc1768/pins_BIGTREE_SKR_V1.3.h"    // LPC1768                                env:LPC1768
-#elif MB(TH3D_EZBOARD)
-  #include "lpc1768/pins_TH3D_EZBOARD.h"        // LPC1768                                env:LPC1768
 #elif MB(GMARSH_X6_REV1)
   #include "lpc1768/pins_GMARSH_X6_REV1.h"      // LPC1768                                env:LPC1768
 
@@ -364,6 +381,8 @@
   #include "lpc1769/pins_COHESION3D_MINI.h"     // LPC1769                                env:LPC1769
 #elif MB(SMOOTHIEBOARD)
   #include "lpc1769/pins_SMOOTHIEBOARD.h"       // LPC1769                                env:LPC1769
+#elif MB(TH3D_EZBOARD)
+  #include "lpc1769/pins_TH3D_EZBOARD.h"        // LPC1769                                env:LPC1769
 
 //
 // Due (ATSAM) boards
@@ -430,34 +449,44 @@
 // STM32 ARM Cortex-M3
 //
 
-#elif MB(STM32F1R)
-  #include "stm32/pins_STM32F1R.h"              // STM32F1                                env:STM32F1
-#elif MB(STM3R_MINI)
-  #include "stm32/pins_STM3R_MINI.h"            // STM32F1                                env:STM32F1
-#elif MB(BIGTREE_SKR_MINI_V1_1)
-  #include "stm32/pins_BIGTREE_SKR_MINI_V1_1.h" // STM32F1                                env:BIGTREE_SKR_MINI
-#elif MB(BIGTREE_SKR_MINI_E3)
-  #include "stm32/pins_BIGTREE_SKR_MINI_E3.h"   // STM32F1                                env:BIGTREE_SKR_MINI
+#elif MB(STM32F103RE)
+  #include "stm32/pins_STM32F1R.h"              // STM32F1                                env:STM32F103RE
 #elif MB(MALYAN_M200)
-  #include "stm32/pins_MALYAN_M200.h"           // STM32F1                                env:malyanm200
-#elif MB(CHITU3D)
-  #include "stm32/pins_CHITU3D.h"               // STM32F1                                env:STM32F1
+  #include "stm32/pins_MALYAN_M200.h"           // STM32F1                                env:STM32F103CB_malyan
+#elif MB(STM3R_MINI)
+  #include "stm32/pins_STM3R_MINI.h"            // STM32F1                                env:STM32F103RE
 #elif MB(GTM32_PRO_VB)
-  #include "stm32/pins_GTM32_PRO_VB.h"          // STM32F1                                env:STM32F1
+  #include "stm32/pins_GTM32_PRO_VB.h"          // STM32F1                                env:STM32F103RE
 #elif MB(MORPHEUS)
-  #include "stm32/pins_MORPHEUS.h"              // STM32F1                                env:STM32F1
+  #include "stm32/pins_MORPHEUS.h"              // STM32F1                                env:STM32F103RE
+#elif MB(CHITU3D)
+  #include "stm32/pins_CHITU3D.h"               // STM32F1                                env:STM32F103RE
 #elif MB(MKS_ROBIN)
   #include "stm32/pins_MKS_ROBIN.h"             // STM32F1                                env:mks_robin
 #elif MB(MKS_ROBIN_MINI)
   #include "stm32/pins_MKS_ROBIN_MINI.h"        // STM32F1                                env:mks_robin_mini
 #elif MB(MKS_ROBIN_NANO)
   #include "stm32/pins_MKS_ROBIN_NANO.h"        // STM32F1                                env:mks_robin_nano
+#elif MB(MKS_ROBIN_LITE)
+  #include "stm32/pins_MKS_ROBIN_LITE.h"        // STM32F1                                env:mks_robin_lite
+#elif MB(BIGTREE_SKR_MINI_V1_1)
+  #include "stm32/pins_BIGTREE_SKR_MINI_V1_1.h" // STM32F1                                env:STM32F103RC_bigtree env:STM32F103RC_bigtree_512K env:STM32F103RC_bigtree_NOUSB env:STM32F103RC_bigtree_512K_NOUSB
+#elif MB(BTT_SKR_MINI_E3_V1_2)
+  #include "stm32/pins_BTT_SKR_MINI_E3_V1_2.h"  // STM32F1                                env:STM32F103RC_bigtree env:STM32F103RC_bigtree_512K env:STM32F103RC_bigtree_NOUSB env:STM32F103RC_bigtree_512K_NOUSB
+#elif MB(BIGTREE_SKR_MINI_E3)
+  #include "stm32/pins_BIGTREE_SKR_MINI_E3.h"   // STM32F1                                env:STM32F103RC_bigtree env:STM32F103RC_bigtree_512K env:STM32F103RC_bigtree_NOUSB env:STM32F103RC_bigtree_512K_NOUSB
+#elif MB(BIGTREE_SKR_E3_DIP)
+  #include "stm32/pins_BIGTREE_SKR_E3_DIP.h"    // STM32F1                                env:STM32F103RC_bigtree env:STM32F103RC_bigtree_512K env:STM32F103RC_bigtree_NOUSB env:STM32F103RC_bigtree_512K_NOUSB
 #elif MB(JGAURORA_A5S_A1)
-  #include "stm32/pins_JGAURORA_A5S_A1.h"       // STM32F1                                env:JGAURORA_A5S_A1
+  #include "stm32/pins_JGAURORA_A5S_A1.h"       // STM32F1                                env:jgaurora_a5s_a1
 #elif MB(FYSETC_AIO_II)
-  #include "stm32/pins_FYSETC_AIO_II.h"         // STM32F1                                env:fysetc_STM32F1
+  #include "stm32/pins_FYSETC_AIO_II.h"         // STM32F1                                env:STM32F103RC_fysetc
 #elif MB(FYSETC_CHEETAH)
-  #include "stm32/pins_FYSETC_CHEETAH.h"        // STM32F1                                env:fysetc_STM32F1
+  #include "stm32/pins_FYSETC_CHEETAH.h"        // STM32F1                                env:STM32F103RC_fysetc
+#elif MB(FYSETC_CHEETAH_V12)
+  #include "stm32/pins_FYSETC_CHEETAH_V12.h"    // STM32F1                                env:STM32F103RC_fysetc
+#elif MB(LONGER3D_LK)
+  #include "stm32/pins_LONGER3D_LK.h"           // STM32F1                                env:STM32F103VE_longer
 
 //
 // ARM Cortex-M4F
@@ -474,18 +503,24 @@
 
 #elif MB(BEAST)
   #include "stm32/pins_BEAST.h"                 // STM32F4                                env:STM32F4
-#elif MB(STM32F4)
-  #include "stm32/pins_STM32F4.h"               // STM32F4                                env:STM32F4
+#elif MB(GENERIC_STM32F4)
+  #include "stm32/pins_GENERIC_STM32F4.h"       // STM32F4                                env:STM32F4
 #elif MB(ARMED)
   #include "stm32/pins_ARMED.h"                 // STM32F4                                env:ARMED
 #elif MB(RUMBA32)
   #include "stm32/pins_RUMBA32.h"               // STM32F4                                env:RUMBA32
 #elif MB(BLACK_STM32F407VE)
-  #include "stm32/pins_BLACK_STM32F407VE.h"     // STM32F4                                env:black_stm32f407ve
+  #include "stm32/pins_BLACK_STM32F407VE.h"     // STM32F4                                env:STM32F407VE_black
 #elif MB(STEVAL)
   #include "stm32/pins_STEVAL.h"                // STM32F4                                env:STM32F4
 #elif MB(BIGTREE_SKR_PRO_V1_1)
   #include "stm32/pins_BIGTREE_SKR_PRO_V1.1.h"  // STM32F4                                env:BIGTREE_SKR_PRO
+#elif MB(BIGTREE_BTT002_V1_0)
+  #include "stm32/pins_BIGTREE_BTT002_V1.0.h"   // STM32F4                                env:BIGTREE_BTT002
+#elif MB(LERDGE_K)
+  #include "stm32/pins_LERDGE_K.h"              // STM32F4                                env:STM32F4
+#elif MB(LERDGE_X)
+  #include "stm32/pins_LERDGE_X.h"              // STM32F4                                env:STM32F4
 
 //
 // ARM Cortex M7
@@ -494,13 +529,14 @@
 #elif MB(THE_BORG)
   #include "stm32/pins_THE_BORG.h"              // STM32F7                                env:STM32F7
 #elif MB(REMRAM_V1)
-  #include "stm32/pins_REMRAM_V1.h"             // STM32F7                                env:STM32F7xx
+  #include "stm32/pins_REMRAM_V1.h"             // STM32F7                                env:STM32F7
 
 //
 // Espressif ESP32
 //
 
-#elif MB(ESP32)
+#elif MB(ESPRESSIF_ESP32)
+
   #include "esp32/pins_ESP32.h"                 // ESP32                                  env:esp32
 
 //
@@ -751,8 +787,8 @@
 #ifndef SD_DETECT_PIN
   #define SD_DETECT_PIN -1
 #endif
-#ifndef SDPOWER
-  #define SDPOWER -1
+#ifndef SDPOWER_PIN
+  #define SDPOWER_PIN -1
 #endif
 #ifndef SDSS
   #define SDSS -1
@@ -769,6 +805,9 @@
 #endif
 #ifndef SUICIDE_PIN
   #define SUICIDE_PIN -1
+#endif
+#ifndef SUICIDE_PIN_INVERTING
+  #define SUICIDE_PIN_INVERTING false
 #endif
 
 #ifndef NUM_SERVO_PLUGS
@@ -876,7 +915,7 @@
 //
 // Disable unused endstop / probe pins
 //
-#if !USES_Z_MIN_PROBE_ENDSTOP
+#if !HAS_CUSTOM_PROBE_PIN
   #undef Z_MIN_PROBE_PIN
   #define Z_MIN_PROBE_PIN    -1
 #endif
@@ -915,7 +954,7 @@
   #define LCD_PINS_D4 -1
 #endif
 
-#if HAS_CHARACTER_LCD
+#if HAS_CHARACTER_LCD || TOUCH_UI_ULTIPANEL
   #ifndef LCD_PINS_D5
     #define LCD_PINS_D5 -1
   #endif
@@ -925,10 +964,6 @@
   #ifndef LCD_PINS_D7
     #define LCD_PINS_D7 -1
   #endif
-#else
-  #undef LCD_PINS_D5
-  #undef LCD_PINS_D6
-  #undef LCD_PINS_D7
 #endif
 
 /**
@@ -952,9 +987,6 @@
       #error "No E stepper plug left for X2!"
     #endif
   #endif
-  #ifndef X2_CS_PIN
-    #define X2_CS_PIN     _EPIN(E_STEPPERS, CS)
-  #endif
   #ifndef X2_MS1_PIN
     #define X2_MS1_PIN    _EPIN(E_STEPPERS, MS1)
   #endif
@@ -964,7 +996,10 @@
   #ifndef X2_MS3_PIN
     #define X2_MS3_PIN    _EPIN(E_STEPPERS, MS3)
   #endif
-  #if AXIS_DRIVER_TYPE_X2(TMC2208) || AXIS_DRIVER_TYPE_X2(TMC2209)
+  #if AXIS_HAS_SPI(X2) && !defined(X2_CS_PIN)
+    #define X2_CS_PIN     _EPIN(E_STEPPERS, CS)
+  #endif
+  #if AXIS_HAS_UART(X2)
     #ifndef X2_SERIAL_TX_PIN
       #define X2_SERIAL_TX_PIN _EPIN(E_STEPPERS, SERIAL_TX)
     #endif
@@ -977,6 +1012,19 @@
   #define Y2_E_INDEX E_STEPPERS
 #endif
 
+#ifndef X2_CS_PIN
+  #define X2_CS_PIN  -1
+#endif
+#ifndef X2_MS1_PIN
+  #define X2_MS1_PIN -1
+#endif
+#ifndef X2_MS2_PIN
+  #define X2_MS2_PIN -1
+#endif
+#ifndef X2_MS3_PIN
+  #define X2_MS3_PIN -1
+#endif
+
 // The Y2 axis, if any, should be the next open extruder port
 #if ENABLED(Y_DUAL_STEPPER_DRIVERS)
   #ifndef Y2_STEP_PIN
@@ -987,9 +1035,6 @@
       #error "No E stepper plug left for Y2!"
     #endif
   #endif
-  #ifndef Y2_CS_PIN
-    #define Y2_CS_PIN     _EPIN(Y2_E_INDEX, CS)
-  #endif
   #ifndef Y2_MS1_PIN
     #define Y2_MS1_PIN    _EPIN(Y2_E_INDEX, MS1)
   #endif
@@ -999,7 +1044,10 @@
   #ifndef Y2_MS3_PIN
     #define Y2_MS3_PIN    _EPIN(Y2_E_INDEX, MS3)
   #endif
-  #if AXIS_DRIVER_TYPE_Y2(TMC2208) || AXIS_DRIVER_TYPE_Y2(TMC2209)
+  #if AXIS_HAS_SPI(Y2) && !defined(Y2_CS_PIN)
+    #define Y2_CS_PIN     _EPIN(Y2_E_INDEX, CS)
+  #endif
+  #if AXIS_HAS_UART(Y2)
     #ifndef Y2_SERIAL_TX_PIN
       #define Y2_SERIAL_TX_PIN _EPIN(Y2_E_INDEX, SERIAL_TX)
     #endif
@@ -1012,6 +1060,19 @@
   #define Z2_E_INDEX Y2_E_INDEX
 #endif
 
+#ifndef Y2_CS_PIN
+  #define Y2_CS_PIN  -1
+#endif
+#ifndef Y2_MS1_PIN
+  #define Y2_MS1_PIN -1
+#endif
+#ifndef Y2_MS2_PIN
+  #define Y2_MS2_PIN -1
+#endif
+#ifndef Y2_MS3_PIN
+  #define Y2_MS3_PIN -1
+#endif
+
 // The Z2 axis, if any, should be the next open extruder port
 #if Z_MULTI_STEPPER_DRIVERS
   #ifndef Z2_STEP_PIN
@@ -1022,9 +1083,6 @@
       #error "No E stepper plug left for Z2!"
     #endif
   #endif
-  #ifndef Z2_CS_PIN
-    #define Z2_CS_PIN     _EPIN(Z2_E_INDEX, CS)
-  #endif
   #ifndef Z2_MS1_PIN
     #define Z2_MS1_PIN    _EPIN(Z2_E_INDEX, MS1)
   #endif
@@ -1034,7 +1092,10 @@
   #ifndef Z2_MS3_PIN
     #define Z2_MS3_PIN    _EPIN(Z2_E_INDEX, MS3)
   #endif
-  #if AXIS_DRIVER_TYPE_Z2(TMC2208) || AXIS_DRIVER_TYPE_Z2(TMC2209)
+  #if AXIS_HAS_SPI(Z2) && !defined(Z2_CS_PIN)
+    #define Z2_CS_PIN     _EPIN(Z2_E_INDEX, CS)
+  #endif
+  #if AXIS_HAS_UART(Z2)
     #ifndef Z2_SERIAL_TX_PIN
       #define Z2_SERIAL_TX_PIN _EPIN(Z2_E_INDEX, SERIAL_TX)
     #endif
@@ -1047,6 +1108,19 @@
   #define Z3_E_INDEX Z2_E_INDEX
 #endif
 
+#ifndef Z2_CS_PIN
+  #define Z2_CS_PIN  -1
+#endif
+#ifndef Z2_MS1_PIN
+  #define Z2_MS1_PIN -1
+#endif
+#ifndef Z2_MS2_PIN
+  #define Z2_MS2_PIN -1
+#endif
+#ifndef Z2_MS3_PIN
+  #define Z2_MS3_PIN -1
+#endif
+
 #if ENABLED(Z_TRIPLE_STEPPER_DRIVERS)
   #ifndef Z3_STEP_PIN
     #define Z3_STEP_PIN   _EPIN(Z3_E_INDEX, STEP)
@@ -1056,8 +1130,10 @@
       #error "No E stepper plug left for Z3!"
     #endif
   #endif
-  #ifndef Z3_CS_PIN
-    #define Z3_CS_PIN     _EPIN(Z3_E_INDEX, CS)
+  #if AXIS_HAS_SPI(Z3)
+    #ifndef Z3_CS_PIN
+      #define Z3_CS_PIN     _EPIN(Z3_E_INDEX, CS)
+    #endif
   #endif
   #ifndef Z3_MS1_PIN
     #define Z3_MS1_PIN    _EPIN(Z3_E_INDEX, MS1)
@@ -1068,7 +1144,7 @@
   #ifndef Z3_MS3_PIN
     #define Z3_MS3_PIN    _EPIN(Z3_E_INDEX, MS3)
   #endif
-  #if AXIS_DRIVER_TYPE_Z3(TMC2208) || AXIS_DRIVER_TYPE_Z3(TMC2209)
+  #if AXIS_HAS_UART(Z3)
     #ifndef Z3_SERIAL_TX_PIN
       #define Z3_SERIAL_TX_PIN _EPIN(Z3_E_INDEX, SERIAL_TX)
     #endif
@@ -1077,3 +1153,34 @@
     #endif
   #endif
 #endif
+
+#ifndef Z3_CS_PIN
+  #define Z3_CS_PIN  -1
+#endif
+#ifndef Z3_MS1_PIN
+  #define Z3_MS1_PIN -1
+#endif
+#ifndef Z3_MS2_PIN
+  #define Z3_MS2_PIN -1
+#endif
+#ifndef Z3_MS3_PIN
+  #define Z3_MS3_PIN -1
+#endif
+
+#if HAS_GRAPHICAL_LCD
+  #if !defined(ST7920_DELAY_1) && defined(BOARD_ST7920_DELAY_1)
+    #define ST7920_DELAY_1 BOARD_ST7920_DELAY_1
+  #endif
+  #if !defined(ST7920_DELAY_2) && defined(BOARD_ST7920_DELAY_2)
+    #define ST7920_DELAY_2 BOARD_ST7920_DELAY_2
+  #endif
+  #if !defined(ST7920_DELAY_3) && defined(BOARD_ST7920_DELAY_3)
+    #define ST7920_DELAY_3 BOARD_ST7920_DELAY_3
+  #endif
+#else
+  #undef ST7920_DELAY_1
+  #undef ST7920_DELAY_2
+  #undef ST7920_DELAY_3
+#endif
+
+#undef HAS_FREE_AUX2_PINS

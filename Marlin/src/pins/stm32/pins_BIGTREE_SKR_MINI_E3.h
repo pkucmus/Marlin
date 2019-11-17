@@ -1,9 +1,9 @@
 /**
  * Marlin 3D Printer Firmware
- * Copyright (C) 2019 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
+ * Copyright (c) 2019 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
  *
  * Based on Sprinter and grbl.
- * Copyright (C) 2011 Camiel Gubbels / Erik van der Zalm
+ * Copyright (c) 2011 Camiel Gubbels / Erik van der Zalm
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,18 +19,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+#pragma once
 
 #ifndef TARGET_STM32F1
   #error "Oops! Select an STM32F1 board in 'Tools > Board.'"
 #endif
 
-#define BOARD_NAME "BIGTREE SKR Mini E3"
+#define BOARD_INFO_NAME "BIGTREE SKR Mini E3"
 
 // Release PB3/PB4 (E0 STP/DIR) from JTAG pins
 #define DISABLE_JTAG
 
 // Ignore temp readings during development.
 //#define BOGUS_TEMPERATURE_GRACE_PERIOD 2000
+
+#define FLASH_EEPROM_EMULATION
+#define EEPROM_PAGE_SIZE     uint16(0x800) // 2KB
+#define EEPROM_START_ADDRESS uint32(0x8000000 + (STM32_FLASH_SIZE) * 1024 - 2 * EEPROM_PAGE_SIZE)
+#undef E2END
+#define E2END                (EEPROM_PAGE_SIZE - 1) // 2KB
 
 //
 // Servos
@@ -102,7 +109,7 @@
 //
 // USB connect control
 //
-#define USB_CONNECT        PC13
+#define USB_CONNECT_PIN    PC13
 #define USB_CONNECT_INVERTING false
 
 #define SD_DETECT_PIN      PC4
@@ -135,3 +142,15 @@
   #endif
 
 #endif // HAS_SPI_LCD
+
+//
+// SD Support
+//
+#define HAS_ONBOARD_SD
+
+#ifndef SDCARD_CONNECTION
+  #define SDCARD_CONNECTION ONBOARD
+#endif
+
+#define ON_BOARD_SPI_DEVICE 1    //SPI1
+#define ONBOARD_SD_CS_PIN  PA4   // Chip select for "System" SD card

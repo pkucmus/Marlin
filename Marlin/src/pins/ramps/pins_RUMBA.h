@@ -27,17 +27,15 @@
 
 #ifndef __AVR_ATmega2560__
   #error "Oops! Select 'Arduino/Genuino Mega or Mega 2560' in 'Tools > Board.'"
-#endif
-
-#if HOTENDS > 3 || E_STEPPERS > 3
+#elif HOTENDS > 3 || E_STEPPERS > 3
   #error "RUMBA supports up to 3 hotends / E-steppers. Comment out this line to continue."
 #endif
 
-#ifndef BOARD_NAME
-  #define BOARD_NAME "Rumba"
+#ifndef BOARD_INFO_NAME
+  #define BOARD_INFO_NAME "Rumba"
 #endif
 #ifndef DEFAULT_MACHINE_NAME
-  #define DEFAULT_MACHINE_NAME BOARD_NAME
+  #define DEFAULT_MACHINE_NAME BOARD_INFO_NAME
 #endif
 
 //
@@ -122,7 +120,10 @@
 
 // Optional for extruder 4 or chamber:
 //#define TEMP_X_PIN         12   // Analog Input (default connector for thermistor *T3* on rumba board is used)
-//#define TEMP_CHAMBER_PIN   12   // Analog Input (default connector for thermistor *T3* on rumba board is used)
+
+#ifndef TEMP_CHAMBER_PIN
+  //#define TEMP_CHAMBER_PIN 12   // Analog Input (default connector for thermistor *T3* on rumba board is used)
+#endif
 
 #if TEMP_SENSOR_BED == -1
   #define TEMP_BED_PIN      7   // Analog Input (connector *K3* on RUMBA thermocouple ADD ON is used <-- this can't be used when TEMP_SENSOR_2 is defined as thermocouple)
@@ -142,7 +143,9 @@
 #ifndef FAN_PIN
   #define FAN_PIN           7
 #endif
-#define FAN1_PIN            8
+#ifndef FAN1_PIN
+  #define FAN1_PIN          8
+#endif
 
 //
 // Misc. Functions
@@ -156,10 +159,10 @@
 // M3/M4/M5 - Spindle/Laser Control
 //
 #ifndef SPINDLE_LASER_PWM_PIN
-  #define SPINDLE_LASER_PWM_PIN 4   // MUST BE HARDWARE PWM. Pin 4 interrupts OC0* and OC1* always in use?
+  #define SPINDLE_LASER_PWM_PIN 4   // Hardware PWM. Pin 4 interrupts OC0* and OC1* always in use?
 #endif
 #ifndef SPINDLE_LASER_ENA_PIN
-  #define SPINDLE_LASER_ENA_PIN    14   // Pin should have a pullup!
+  #define SPINDLE_LASER_ENA_PIN 14   // Pullup!
 #endif
 #ifndef SPINDLE_DIR_PIN
   #define SPINDLE_DIR_PIN  15
@@ -217,7 +220,6 @@
 #define BEEPER_PIN         44
 
 #if ENABLED(SDSUPPORT)
-  #define SDPOWER          -1
   #define SDSS             53
   #define SD_DETECT_PIN    49
 #endif

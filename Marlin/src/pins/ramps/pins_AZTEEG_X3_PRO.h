@@ -27,13 +27,11 @@
 
 #ifndef __AVR_ATmega2560__
   #error "Oops! Select 'Arduino/Genuino Mega or Mega 2560' in 'Tools > Board.'"
-#endif
-
-#if HOTENDS > 5 || E_STEPPERS > 5
+#elif HOTENDS > 5 || E_STEPPERS > 5
   #error "Azteeg X3 Pro supports up to 5 hotends / E-steppers. Comment out this line to continue."
 #endif
 
-#define BOARD_NAME "Azteeg X3 Pro"
+#define BOARD_INFO_NAME "Azteeg X3 Pro"
 
 //
 // RAMPS pins overrides
@@ -160,10 +158,9 @@
 
 #if HAS_CUTTER   // EXP2 header
   #if ANY(VIKI2, miniVIKI)
-    #undef BTN_EN2
-    #define BTN_EN2             31   // need 7 for the spindle speed PWM
+    #define BTN_EN2        31   // Pin 7 needed for Spindle PWM
   #endif
-  #define SPINDLE_LASER_PWM_PIN     7   // must have a hardware PWM
-  #define SPINDLE_LASER_ENA_PIN    20   // Pin should have a pullup!
-  #define SPINDLE_DIR_PIN          21
+  #define SPINDLE_LASER_PWM_PIN  7   // Hardware PWM
+  #define SPINDLE_LASER_ENA_PIN 20   // Pullup!
+  #define SPINDLE_DIR_PIN       21
 #endif

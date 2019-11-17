@@ -30,9 +30,9 @@
 #endif
 
 #if MB(MINIRAMBO_10A)
-  #define BOARD_NAME "Mini RAMBo 1.0a"
+  #define BOARD_INFO_NAME "Mini RAMBo 1.0a"
 #else
-  #define BOARD_NAME "Mini RAMBo"
+  #define BOARD_INFO_NAME "Mini RAMBo"
 #endif
 
 //
@@ -125,8 +125,8 @@
 // M3/M4/M5 - Spindle/Laser Control
 //
 // use P1 connector for spindle pins
-#define SPINDLE_LASER_PWM_PIN     9   // MUST BE HARDWARE PWM
-#define SPINDLE_LASER_ENA_PIN    18   // Pin should have a pullup!
+#define SPINDLE_LASER_PWM_PIN     9   // Hardware PWM
+#define SPINDLE_LASER_ENA_PIN    18   // Pullup!
 #define SPINDLE_DIR_PIN          19
 
 //
@@ -141,13 +141,13 @@
 //
 // LCD / Controller
 //
-#if HAS_SPI_LCD
+#if HAS_SPI_LCD || TOUCH_UI_ULTIPANEL
 
   #if !MB(MINIRAMBO_10A)
     #define KILL_PIN       32
   #endif
 
-  #if ENABLED(NEWPANEL)
+  #if ENABLED(ULTIPANEL) || TOUCH_UI_ULTIPANEL
 
     #if MB(MINIRAMBO_10A)
 
@@ -187,6 +187,6 @@
 
     #endif // !MINIRAMBO_10A
 
-  #endif // NEWPANEL
+  #endif // ULTIPANEL || TOUCH_UI_ULTIPANEL
 
 #endif // HAS_SPI_LCD
