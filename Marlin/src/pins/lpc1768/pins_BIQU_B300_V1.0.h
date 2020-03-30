@@ -44,6 +44,8 @@
 #define FLASH_EEPROM_EMULATION
 //#define SDCARD_EEPROM_EMULATION
 
+#define PS_ON_PIN                          P1_23
+
 //
 // Limit Switches
 //
@@ -106,6 +108,9 @@
 //
 #define TEMP_0_PIN                      P0_24_A1  // A0 (T0)
 #define TEMP_BED_PIN                    P0_23_A0  // A1 (T1)
+
+// #define TEMP_0_PIN          1   // A0 (T0)
+// #define TEMP_BED_PIN        0   // A1 (T1)
 
 //
 // Heaters / Fans
